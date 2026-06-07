@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - G-Mart</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Grocery Web App</div>
+
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/users">Users</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/add-product">Add Product</a></li>
+            <li><a href="/admin-orders">Orders</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <h1>Dashboard</h1>
+
+        <div class="dashboard-grid">
+
+            <!-- Product Count -->
+            <div class="card">
+                <h3>Product Count</h3>
+                <p id="product-count">{{ product_count }} Products</p>
+
+                <button onclick="window.location.href='/products'">
+                    View Products
+                </button>
+            </div>
+
+            <!-- User Count -->
+            <div class="card">
+                <h3>User Count</h3>
+                <p id="user-count">{{ user_count }} Users</p>
+
+                <button onclick="window.location.href='/users'">
+                    View Users
+                </button>
+            </div>
+
+            <!-- Order Count -->
+            <div class="card">
+                <h3>Order Count</h3>
+                <p id="order-count">{{ order_count }} Orders</p>
+
+                <button onclick="window.location.href='/admin-orders'">
+                    View Orders
+                </button>
+            </div>
+
+            <!-- Add Product -->
+            <div class="card">
+                <h3>Add Product</h3>
+
+                <button onclick="window.location.href='/add-product'">
+                    Add Product
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
+

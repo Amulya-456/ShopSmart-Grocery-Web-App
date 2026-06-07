@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - G-Mart</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='orders.css') }}">
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='history.css') }}">
+</head>
+<body>
+
+    <div class="header">
+
+        <h1>G-Mart</h1>
+
+        <div class="nav">
+            <a href="/">Home</a>
+            <a href="/items">Items</a>
+            <a href="/cart">MyCart</a>
+            <a href="/orders" class="active">Orders</a>
+            <a href="/history">History</a>
+            <a href="/login">Logout</a>
+        </div>
+
+    </div>
+
+    
+
+        <div class="orders-container">
+            <h2>My Orders</h2>
+
+            <div id="ordersContainer">
+                <p>Loading orders...</p>
+            </div>
+        </div>
+
+    <!-- Orders JavaScript -->
+    <script src="{{ url_for('static', filename='orders.js') }}"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,204 @@
+/* =========================
+   Reset
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   Body
+========================= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:
+        linear-gradient(
+            rgba(118, 155, 23, 0.85),
+            rgba(203, 211, 163, 0.85)
+        ),
+        url('https://as2.ftcdn.net/jpg/15/28/26/07/1000_F_1528260700_5upT0oGw6qtTctF8eaUAvfPnhWex4n9e.jpg')
+        no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* =========================
+   Navbar
+========================= */
+.navbar {
+    background-color: #00b388;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    border-bottom: 2px solid white;
+}
+
+/* =========================
+   Login Container
+========================= */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 30px;
+}
+
+/* =========================
+   Login Box
+========================= */
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* =========================
+   Form
+========================= */
+.login-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-box label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #444;
+}
+
+.login-box input,
+.login-box select,
+.login-box textarea {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    font-size: 15px;
+}
+
+.login-box input:focus,
+.login-box select:focus,
+.login-box textarea:focus {
+    border-color: #00b388;
+}
+
+/* =========================
+   Button
+========================= */
+.login-box button {
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.login-box button:hover {
+    background: #0056b3;
+}
+
+/* =========================
+   Toggle Role
+========================= */
+.toggle-role {
+    margin-bottom: 15px;
+}
+
+.toggle-role label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* =========================
+   Links
+========================= */
+.signup-text {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.signup-text a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   Toast
+========================= */
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #555;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: none;
+    z-index: 1000;
+    font-weight: 500;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .login-box {
+        width: 95%;
+    }
+}

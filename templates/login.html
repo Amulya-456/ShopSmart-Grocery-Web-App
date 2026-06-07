@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - G-Mart</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">G-Mart</div>
+
+    </nav>
+
+    <div class="login-container">
+        <div class="login-box">
+
+            <h2>Login</h2>
+
+            <form id="login-form">
+
+                <label>Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    required
+                    placeholder="Enter email"
+                >
+
+                <label>Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    required
+                    placeholder="Enter password"
+                >
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <p class="signup-text">
+                Don't have an account?
+                <a href="/signup">Sign Up</a>
+                <br><br>
+
+                <a href="/forgot-password">
+                    Forgot Password?
+                </a>
+            </p>
+
+        </div>
+    </div>
+
+    <script>
+
+        const form =
+            document.getElementById("login-form");
+
+        form.addEventListener("submit", async (e) => {
+
+            e.preventDefault();
+
+            const email =
+                document.getElementById("email")
+                .value.trim();
+
+            const password =
+                document.getElementById("password")
+                .value.trim();
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:5000/api/auth/login",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type":
+                            "application/json"
+                        },
+                        body: JSON.stringify({
+                            email,
+                            password
+                        })
+                    }
+                );
+
+                const data =
+                    await response.json();
+
+                if (response.ok && data.success) {
+
+                    localStorage.setItem(
+                        "user",
+                        JSON.stringify(data.user || {
+                            email: email
+                        })
+                    );
+
+                    alert("✅ Login Successful!");
+
+                    window.location.href =
+                        "/items";
+
+                } else {
+
+                    alert(
+                        data.message ||
+                        "Invalid Credentials"
+                    );
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Something went wrong. Try again."
+                );
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
+

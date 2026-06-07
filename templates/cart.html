@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart - G-Mart</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='cart.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">G-Mart</div>
+
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('items') }}">Items</a></li>
+            <li><a href="{{ url_for('cart') }}" class="active">MyCart</a></li>
+            <li><a href="{{ url_for('orders') }}">Orders</a></li>
+            <li><a href="{{ url_for('history') }}">History</a></li>
+            <li><a href="{{ url_for('login') }}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <h2>Your Cart</h2>
+
+    <div class="cart-container" id="cart-container"></div>
+
+    <div id="checkout-container">
+        <div id="total-row">
+            <h3>Checkout</h3>
+            <h3 id="total-price">Total: ₹0</h3>
+        </div>
+
+        <div style="text-align:right;">
+            <button id="place-order-btn">Place Order</button>
+        </div>
+    </div>
+
+    <script>
+        const cartContainer = document.getElementById("cart-container");
+        const totalPriceElement = document.getElementById("total-price");
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        function renderCart() {
+            cartContainer.innerHTML = "";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+
+                if (!item.quantity || isNaN(item.quantity)) {
+                    item.quantity = 1;
+                }
+
+                const priceNumber =
+                    parseFloat(item.price.toString().replace(/[^\d.]/g, "")) || 0;
+
+                total += priceNumber * item.quantity;
+
+                const cartItem = document.createElement("div");
+                cartItem.className = "cart-item";
+
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-image">
+
+                    <div class="item-info">
+                        <h3>${item.name}</h3>
+                    </div>
+
+                    <div class="item-controls">
+
+                        <div class="item-price">
+                            ₹${priceNumber}
+                        </div>
+
+                        <div class="quantity-controls">
+                            <button onclick="updateQuantity(${index}, -1)">-</button>
+
+                            <span id="qty-${index}">
+                                ${item.quantity}
+                            </span>
+
+                            <button onclick="updateQuantity(${index}, 1)">+</button>
+                        </div>
+
+                        <button class="remove-btn"
+                                onclick="removeItem(${index})">
+                            Remove from Cart
+                        </button>
+
+                    </div>
+                `;
+
+                cartContainer.appendChild(cartItem);
+            });
+
+            totalPriceElement.innerText = `Total: ₹${total}`;
+        }
+
+        function updateQuantity(index, change) {
+
+            cart[index].quantity =
+                Math.max(1, cart[index].quantity + change);
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+        }
+
+        function removeItem(index) {
+
+            cart.splice(index, 1);
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+        }
+
+        document.getElementById("place-order-btn")
+            .addEventListener("click", () => {
+
+                if (cart.length === 0) {
+                    alert("Your cart is empty.");
+                    return;
+                }
+
+                localStorage.setItem(
+                    "selectedProduct",
+                    JSON.stringify(cart[0])
+                );
+
+                localStorage.setItem(
+                    "cart",
+                    JSON.stringify(cart)
+                );
+
+                window.location.href = "{{ url_for('place_order') }}";
+            });
+
+        renderCart();
+    </script>
+
+</body>
+</html>
+

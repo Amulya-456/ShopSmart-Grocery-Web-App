@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - G-Mart</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">G-Mart</div>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/cart">MyCart</a></li>
+            <li><a href="/orders">Orders</a></li>
+            <li><a href="/history">History</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <h2>Sign Up</h2>
+
+            <form id="signup-form">
+
+                <label>Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    required
+                    placeholder="Enter Name"
+                >
+
+                <label>Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    required
+                    placeholder="Enter Email"
+                >
+
+                <label>Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    required
+                    placeholder="Enter Password"
+                >
+
+                <button type="submit">
+                    Sign Up
+                </button>
+
+            </form>
+
+            <p class="signup-text">
+                Already have an account?
+                <a href="/login">Login</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const form =
+            document.getElementById("signup-form");
+
+        form.addEventListener("submit", async (e) => {
+
+            e.preventDefault();
+
+            const name =
+                document.getElementById("name")
+                .value.trim();
+
+            const email =
+                document.getElementById("email")
+                .value.trim();
+
+            const password =
+                document.getElementById("password")
+                .value.trim();
+
+            if (!name || !email || !password) {
+                alert("Please fill all fields");
+                return;
+            }
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:5000/api/auth/signup",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type":
+                            "application/json"
+                        },
+                        body: JSON.stringify({
+                            name,
+                            email,
+                            password
+                        })
+                    }
+                );
+
+                const data =
+                    await response.json();
+
+                if (response.ok && data.success) {
+
+                    alert("✅ Signup Successful!");
+
+                    window.location.href =
+                        "/login";
+
+                } else {
+
+                    alert(
+                        data.message ||
+                        "Signup Failed"
+                    );
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Something went wrong. Try again."
+                );
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
+

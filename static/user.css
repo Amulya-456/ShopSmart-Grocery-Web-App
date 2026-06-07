@@ -1,0 +1,149 @@
+/* =========================
+   Reset
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   Body
+========================= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:
+        linear-gradient(
+            rgba(118, 155, 23, 0.85),
+            rgba(203, 211, 163, 0.85)
+        ),
+        url('https://as2.ftcdn.net/jpg/15/28/26/07/1000_F_1528260700_5upT0oGw6qtTctF8eaUAvfPnhWex4n9e.jpg')
+        no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* =========================
+   Navbar
+========================= */
+.navbar {
+    background-color: #28c7a6;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    border-bottom: 2px solid white;
+}
+
+/* =========================
+   Container
+========================= */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* =========================
+   Table
+========================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th,
+td {
+    padding: 14px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: #333;
+    color: white;
+    font-size: 16px;
+}
+
+tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+tr:hover {
+    background: #eef8ff;
+}
+
+/* =========================
+   Buttons
+========================= */
+.view-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.view-btn:hover {
+    background: #c0392b;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .container {
+        width: 95%;
+        padding: 15px;
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 700px;
+    }
+}

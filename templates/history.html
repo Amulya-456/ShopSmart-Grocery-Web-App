@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - G-Mart</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+
+    <style>
+        .history-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .order-card {
+            border: 1px solid #aaa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+        }
+
+        .order-card p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">G-Mart</div>
+
+        <ul class="nav-links">
+              <li><a href="/">Home</a></li>
+              <li><a href="/cart">MyCart</a></li>
+              <li><a href="/orders">Orders</a></li>
+              <li><a href="/history">History</a></li>
+              <li><a href="/login">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- History Section -->
+    <div class="history-container">
+
+        <h2>My Order History</h2>
+
+        <div id="order-history"></div>
+
+    </div>
+
+    <script>
+
+    async function loadHistory() {
+
+        try {
+
+            const response = await fetch("/api/orders");
+            const orders = await response.json();
+
+            const historyDiv =
+                document.getElementById("order-history");
+
+            historyDiv.innerHTML = "";
+
+            if (!orders || orders.length === 0) {
+
+                historyDiv.innerHTML =
+                    "<p>No orders found.</p>";
+
+                return;
+            }
+
+            orders.forEach(order => {
+
+                const card =
+                    document.createElement("div");
+
+                card.className = "order-card";
+
+                card.innerHTML = `
+                    <p><strong>Order ID:</strong> ${order.order_id}</p>
+
+                    <p><strong>Date:</strong>
+                        ${order.order_date}
+                    </p>
+
+                    <p><strong>Status:</strong>
+                        ${order.status}
+                    </p>
+
+                    <p><strong>Total Price:</strong>
+                        ₹${order.total}
+                    </p>
+
+                    <p><strong>Payment Method:</strong>
+                        ${order.payment_method}
+                    </p>
+
+                    <p><strong>Address:</strong>
+                        ${order.address}
+                    </p>
+
+                    <p><strong>Phone:</strong>
+                        ${order.phone}
+                    </p>
+                `;
+
+                historyDiv.appendChild(card);
+
+            });
+
+        } catch (error) {
+
+            console.error(error);
+
+            document.getElementById("order-history")
+                .innerHTML =
+                "<p>Failed to load history.</p>";
+        }
+    }
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        loadHistory
+    );
+
+    </script>
+
+</body>
+</html>

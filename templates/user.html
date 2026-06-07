@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Users - G-Mart</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='user.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">Grocery Web App</div>
+
+        <ul class="nav-links">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/users" class="active">Users</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/add-product">Add Product</a></li>
+            <li><a href="/admin-orders">Orders</a></li>
+            <li><a href="/adminlogin">Logout</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- Users Table -->
+    <div class="container">
+
+        <h2>Users</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Sl/No</th>
+                    <th>User ID</th>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+
+            <tbody id="userTableBody">
+                <!-- Populated by user.js -->
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='user.js') }}"></script>
+
+</body>
+</html>
+

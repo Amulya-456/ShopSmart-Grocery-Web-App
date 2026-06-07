@@ -1,0 +1,245 @@
+/* =========================
+   Reset
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   Body
+========================= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:
+        linear-gradient(
+            rgba(118, 155, 23, 0.85),
+            rgba(203, 211, 163, 0.85)
+        ),
+        url('https://as2.ftcdn.net/jpg/15/28/26/07/1000_F_1528260700_5upT0oGw6qtTctF8eaUAvfPnhWex4n9e.jpg')
+        no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* =========================
+   Navbar
+========================= */
+.navbar {
+    background-color: #2ecc71;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    border-bottom: 2px solid white;
+}
+
+/* =========================
+   Page Heading
+========================= */
+h2 {
+    text-align: center;
+    margin: 30px 0;
+    color: white;
+    font-size: 32px;
+}
+
+/* =========================
+   Cart Container
+========================= */
+.cart-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* =========================
+   Cart Item
+========================= */
+.cart-item {
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.cart-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-info h3 {
+    font-size: 20px;
+    color: #333;
+}
+
+.item-controls {
+    text-align: right;
+}
+
+.item-price {
+    color: #27ae60;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* =========================
+   Quantity Controls
+========================= */
+.quantity-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.quantity-controls button {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background: #ddd;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.quantity-controls span {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* =========================
+   Remove Button
+========================= */
+.remove-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    background: #c0392b;
+}
+
+/* =========================
+   Checkout Section
+========================= */
+#checkout-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+#total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#total-price {
+    color: #27ae60;
+}
+
+#place-order-btn {
+    margin-top: 20px;
+    background: #2ecc71;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    float: right;
+}
+
+#place-order-btn:hover {
+    background: #27ae60;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cart-image {
+        margin: 0 0 15px 0;
+    }
+
+    .item-controls {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .quantity-controls {
+        justify-content: center;
+    }
+
+    #total-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #place-order-btn {
+        width: 100%;
+        float: none;
+    }
+}

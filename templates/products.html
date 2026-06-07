@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Products</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='product.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Grocery Web App</div>
+
+        <ul class="nav-links">
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/users">Users</a></li>
+            <li><a href="/products" class="active">Products</a></li>
+            <li><a href="/add-product">Add Product</a></li>
+            <li><a href="/admin-orders">Orders</a></li>
+            <li><a href="/adminlogin">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <h2>Products</h2>
+
+        <div class="search-section">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search Product..."
+                onkeyup="searchProducts()">
+
+            <select id="categoryFilter" onchange="filterProducts()">
+                <option value="all">All Categories</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Meat">Meat</option>
+            </select>
+        </div>
+
+        <div class="products-grid" id="productGrid">
+            <!-- Products loaded by JS -->
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='admin_products.js') }}"></script>
+
+</body>
+</html>

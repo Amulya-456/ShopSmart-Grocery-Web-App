@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome - Grocery Web App</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">G-Mart</div>
+
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+
+            <li>
+               <a href="/login">MyCart</a>
+            </li>
+
+            <li>
+                <a href="/login">Orders</a>
+            </li>
+
+            <li>
+                <a href="/login">History</a>
+            </li>
+
+            <li>
+                <a href="/login">User Login</a> /
+                <a href="/adminlogin">Admin Login</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+
+        <h1>Welcome to Our Grocery Web App</h1>
+        <a href="/login" class="hero-btn">Shop Now</a>
+
+    </div>
+
+    <!-- Toast Message -->
+    <div id="toast" class="toast">
+        You need to log in first!
+    </div>
+
+        <script>
+
+            function checkLogin(event, redirectUrl) {
+
+                const isLoggedIn = localStorage.getItem("user");
+
+                if (!isLoggedIn) {
+
+                    event.preventDefault();
+
+                    window.location.href = "/login";
+
+                } else {
+
+                    window.location.href = redirectUrl;
+
+                }
+            }
+
+            document.querySelectorAll(".protected-link").forEach(link => {
+
+                link.addEventListener("click", function(event) {
+
+                    checkLogin(event, this.getAttribute("href"));
+
+                });
+
+            });
+
+            document.querySelector(".hero-btn").addEventListener("click", function(event) {
+
+                checkLogin(event, "/items");
+
+            });
+
+        </script>
+
+</body>
+</html>
+

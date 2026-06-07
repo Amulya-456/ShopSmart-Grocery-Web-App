@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Orders - G-Mart</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='orders.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+
+        <h1>G-Mart Admin</h1>
+
+        <div class="nav">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/products">Products</a>
+            <a href="/add-product">Add Product</a>
+            <a href="/admin-orders" class="active">Orders</a>
+            <a href="/adminlogin">Logout</a>
+        </div>
+
+    </div>
+
+    <!-- Page Title -->
+    <h2>Admin Orders</h2>
+
+    <!-- Orders List -->
+    <div class="orders-container">
+
+        <div id="ordersContainer">
+            Loading orders...
+        </div>
+
+    </div>
+
+    <script>
+        async function loadOrders() {
+
+            try {
+
+                const response = await fetch("/api/orders");
+                const orders = await response.json();
+
+                const container =
+                    document.getElementById("ordersContainer");
+
+                container.innerHTML = "";
+
+                if (orders.length === 0) {
+                    container.innerHTML =
+                        "<h3>No Orders Found</h3>";
+                    return;
+                }
+
+                orders.forEach(order => {
+
+                    container.innerHTML += `
+                        <div class="order-card">
+
+                            <h3>Order #${order.order_id}</h3>
+
+                            <p>
+                                <strong>User:</strong>
+                                ${order.username || "Guest"}
+                            </p>
+
+                            <p>
+                                <strong>Phone:</strong>
+                                ${order.phone}
+                            </p>
+
+                            <p>
+                                <strong>Address:</strong>
+                                ${order.address}
+                            </p>
+
+                            <p>
+                                <strong>Payment:</strong>
+                                ${order.payment_method}
+                            </p>
+
+                            <p>
+                                <strong>Total:</strong>
+                                ₹${order.total}
+                            </p>
+
+                            <p>
+                                <strong>Current Status:</strong>
+                                ${order.status}
+                            </p>
+
+                            <label>
+                                <strong>Update Status:</strong>
+                            </label>
+
+                            <select
+                                onchange="updateStatus(
+                                    ${order.order_id},
+                                    this.value
+                                )">
+
+                                <option value="Processing"
+                                    ${order.status === "Processing"
+                                    ? "selected" : ""}>
+                                    Processing
+                                </option>
+
+                                <option value="Delivered"
+                                    ${order.status === "Delivered"
+                                    ? "selected" : ""}>
+                                    Delivered
+                                </option>
+
+                                <option value="Cancelled"
+                                    ${order.status === "Cancelled"
+                                    ? "selected" : ""}>
+                                    Cancelled
+                                </option>
+
+                            </select>
+
+                        </div>
+                    `;
+                });
+
+            } catch (error) {
+
+                console.error(error);
+
+                document.getElementById(
+                    "ordersContainer"
+                ).innerHTML =
+                    "<h3>Error Loading Orders</h3>";
+            }
+        }
+
+        async function updateStatus(orderId, status) {
+
+            try {
+
+                const response = await fetch(
+                    `/api/orders/${orderId}/status`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type":
+                            "application/json"
+                        },
+                        body: JSON.stringify({
+                            status: status
+                        })
+                    }
+                );
+
+                const data =
+                    await response.json();
+
+                if (data.success) {
+
+                    alert(
+                        "Order status updated successfully"
+                    );
+
+                    loadOrders();
+
+                } else {
+
+                    alert(
+                        "Failed to update status"
+                    );
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Server error"
+                );
+            }
+        }
+
+        loadOrders();
+    </script>
+
+</body>
+</html>
